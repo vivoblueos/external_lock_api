@@ -1,0 +1,16 @@
+import("//build/templates/build_template.gni")
+
+build_rust("lock_api_crate") {
+  epoch = "0.4"
+  crate_type = "rlib"
+  sources = [ "//external/lock_api/v0.4.12/src/lib.rs" ]
+  inputs = []
+
+  edition = "2021"
+  deps = [ "//external/scopeguard/v1.2.0:scopeguard" ]
+  features = [ "atomic_usize" ]
+
+  rustflags = [
+    "--cap-lints=allow",  # Suppress all warnings in crates.io crates
+  ]
+}
